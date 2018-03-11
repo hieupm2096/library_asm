@@ -2,6 +2,11 @@ CREATE DATABASE DbLibraryASM
 GO
 USE DbLibraryASM
 GO
+CREATE TABLE Reader(
+    _id VARCHAR(5) PRIMARY KEY,
+    _name VARCHAR(30) NOT NULL
+)
+
 CREATE TABLE Book(
     _code VARCHAR(5) PRIMARY KEY,
     _name VARCHAR(100) NOT NULL,
@@ -13,6 +18,8 @@ CREATE TABLE BookHistory(
     _id INT IDENTITY PRIMARY KEY,
     _code VARCHAR(5),
     CONSTRAINT fk_bookhistory_book_code FOREIGN KEY (_code) REFERENCES Book(_code),
+    _reader_id VARCHAR(5),
+    CONSTRAINT fk_bookhistory_reader_id FOREIGN KEY (_reader_id) REFERENCES Reader(_id),
     _borrowedDate DATETIME NOT NULL,
     _returnedDate DATETIME
 )
