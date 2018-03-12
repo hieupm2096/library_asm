@@ -30,6 +30,8 @@ INSERT INTO Book(_code, _name, _author, _status)
             ('B0002', 'Book 2', 'Author 2', 1),
             ('B0003', 'Book 3', 'Author 3', 1)
 
-INSERT INTO BookHistory(_code, _readed_id, _borrowed_date, _expire_date, _returned_date)
+INSERT INTO Reader VALUES ('R0001', 'Reader 1'), ('R0002', 'Reader 2')
+
+INSERT INTO BookHistory(_code, _reader_id, _borrowed_date, _expire_date, _returned_date)
 VALUES ('B0001', 'R0001', '20180304', '20180307', '20180307'),
        ('B0002', 'R0001', '20180304', '20180307', '20180307')
