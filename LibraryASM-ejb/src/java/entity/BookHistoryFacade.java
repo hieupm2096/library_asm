@@ -5,9 +5,11 @@
  */
 package entity;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,4 +30,10 @@ public class BookHistoryFacade extends AbstractFacade<BookHistory> {
         super(BookHistory.class);
     }
     
+    public List<BookHistory> findByCode(Book book) {
+        String query = "SELECT b FROM BookHistory b WHERE b.code = :code";
+        TypedQuery tq = em.createQuery(query, BookHistory.class);
+        tq.setParameter("code", book);
+        return tq.getResultList();
+    }
 }

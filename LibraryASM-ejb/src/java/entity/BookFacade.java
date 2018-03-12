@@ -28,4 +28,8 @@ public class BookFacade extends AbstractFacade<Book> {
         super(Book.class);
     }
     
+    public Book findByCode(String code) {
+        return em.find(Book.class, code);
+    }
+    
 }
