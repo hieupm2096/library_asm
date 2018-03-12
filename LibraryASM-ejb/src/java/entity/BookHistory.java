@@ -36,6 +36,24 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "BookHistory.findByReturnedDate", query = "SELECT b FROM BookHistory b WHERE b.returnedDate = :returnedDate")})
 public class BookHistory implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "_borrowed_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date borrowedDate;
+    @Column(name = "_returned_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date returnedDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "_expire_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expireDate;
+
+    @JoinColumn(name = "_reader_id", referencedColumnName = "_id")
+    @ManyToOne
+    private Reader readerId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -43,14 +61,7 @@ public class BookHistory implements Serializable {
     @GeneratedValue
     @Column(name = "_id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "_borrowedDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date borrowedDate;
-    @Column(name = "_returnedDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date returnedDate;
+    
     @JoinColumn(name = "_code", referencedColumnName = "_code")
     @ManyToOne
     private Book code;
@@ -122,6 +133,22 @@ public class BookHistory implements Serializable {
     @Override
     public String toString() {
         return "entity.BookHistory[ id=" + id + " ]";
+    }
+
+    public Reader getReaderId() {
+        return readerId;
+    }
+
+    public void setReaderId(Reader readerId) {
+        this.readerId = readerId;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
     }
     
 }
